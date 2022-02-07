@@ -9,7 +9,7 @@
             <v-tab>Facturacion</v-tab>
 
             <v-tab-item><Inventario /></v-tab-item>
-            <v-tab-item>Detalle Modulo Compras</v-tab-item>
+            <v-tab-item><Compras /></v-tab-item>
             <v-tab-item>Detalle Modulo Facturacion</v-tab-item>
         </v-tabs>
     </v-card>
@@ -17,11 +17,13 @@
 
 <script>
 import Inventario from './inv/Inventario.vue'
+import Compras from './cmp/Compras.vue'
 
 export default {
     name: "Principal",
     components: {
-        Inventario
+        Inventario,
+        Compras,
     }
 }
 </script>
