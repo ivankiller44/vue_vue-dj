@@ -29,7 +29,7 @@ export class ApiInv extends Api {
         return await super.delete("subcategoria",id)
     }
 
-    async getProducto(id=-1){
+    async getProductos(id=-1){
         return await super.get("producto",id)
     }
 

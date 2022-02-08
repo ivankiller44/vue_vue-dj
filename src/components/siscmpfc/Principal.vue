@@ -1,7 +1,7 @@
 <template>
     <v-card class="color-fondo">
         <v-card-title>
-            <h1 class="font-weight-bold display-6 color-texto">Sistema de Compra y Facturación <small>Curso x Daniel Bojorge</small></h1>
+            <h1 class="font-weight-bold display-6 color-texto">Sistema de Compra y Facturación - <small>Ivan Gamboa Barroso</small></h1>
         </v-card-title>
         <v-tabs>
             <v-tab>Inventario</v-tab>

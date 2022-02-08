@@ -153,7 +153,7 @@ export default {
     async iniciar() {
       try {
         this.loading = true;
-        let r = await this.api.getProducto();
+        let r = await this.api.getProductos();
         this.items = r;
         this.subcategorias = await this.api.getSubCategorias()
       } catch (error) {
