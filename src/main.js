@@ -1,21 +1,24 @@
 import Vue from 'vue'
-import VueSweetAlert2 from 'vue-sweetalert2'
-import 'sweetalert2/dist/sweetalert2.min.css'
+import VueSweetalert2 from 'vue-sweetalert2';
 import App from './App.vue'
 
-import vuetify from './plugins/vuetify'
+import vuetify from './plugins/vuetify';
 import Vuetify from 'vuetify'
+import 'sweetalert2/dist/sweetalert2.min.css';
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import BootstrapVue from 'bootstrap-vue'
-import router from './router'
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap-vue/dist/bootstrap-vue.css"
+import {BootstrapVue,BootstrapVueIcons} from "bootstrap-vue"
+import 'bootstrap-vue/dist/bootstrap-vue-icons.min.css'
 
-import store from './store'
+import router from "./router"
+
+import store from "./store";
 
 Vue.use(Vuetify)
-Vue.use(BootstrapVue)
-Vue.use(VueSweetAlert2)
+Vue.use(BootstrapVue);
+Vue.use(VueSweetalert2);
+Vue.use(BootstrapVueIcons)
 
 Vue.config.productionTip = false
 
