@@ -2,7 +2,7 @@
     <b-container>
         <b-row>
             <b-col>
-                <h1>Bienvenidos al curso de Vue + Django <small>x Ivan Gamboa Barroso</small></h1>
+                <div align="center"><h1>Vue + Django <small>x Ivan Gamboa Barroso</small></h1></div>
                 <div align="center"><img src="../assets/BLASON CAPITULAR.png" alt="" width="50%" height="auto" rounded="circle"></div>
             </b-col>
         </b-row>
