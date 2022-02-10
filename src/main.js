@@ -19,6 +19,23 @@ Vue.use(VueSweetAlert2)
 
 Vue.config.productionTip = false
 
+Vue.mixin({
+  methods:{
+    msg(texto,titulo="",tipo="success"){
+      this.$swal({
+          title:titulo,
+          text:texto,
+          icon:tipo,
+          allowOutsideClick: false,
+          confirmButtonText:"Ok"
+      })
+    },
+    msgError(txt){
+      this.msg(txt,"mixin global","error")
+    }
+  }
+})
+
 new Vue({
   router,
   vuetify,
