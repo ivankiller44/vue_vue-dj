@@ -2,8 +2,8 @@
     <b-container>
         <b-row>
             <b-col>
-                <div align="center"><h1>Vue + Django <small>x Ivan Gamboa Barroso</small></h1></div>
-                <div align="center"><img src="../assets/BLASON CAPITULAR.png" alt="" width="50%" height="auto" rounded="circle"></div>
+                <div align="center"><h1>Fire Bike Service</h1></div>
+                <div align="center"><img src="../assets/banner_FBS.png" alt="" width="90%" height="auto" rounded="circle" ></div>
             </b-col>
         </b-row>
         <b-row>
@@ -15,6 +15,7 @@
                 </b-link>
             </b-col>
         </b-row>
+        <div align="center"><img src="../assets/logo_FBS.jpg" alt="" width="25%" height="auto" rounded="circle" class='imgRedonda'></div>
     </b-container>
 </template>
 
@@ -26,13 +27,8 @@ export default {
             redes:[
                 {
                     red: "facebook",
-                    url: "https://www.facebook.com",
+                    url: "https://www.facebook.com/FireBikeService",
                     color: "info",
-                },
-                {
-                    red: "twitter",
-                    url: "https://twitter.com",
-                    color: "warning",
                 },
                 ]
         }
@@ -41,4 +37,9 @@ export default {
 </script>
 
 <style >
+.imgRedonda {
+    width:300px;
+    height:300px;
+    border-radius:150px;
+}
 </style>

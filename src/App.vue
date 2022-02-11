@@ -24,8 +24,8 @@
 
         <v-list-item link>
           <v-list-item-content>
-            <v-list-item-title class="title">Curso Vue + Django</v-list-item-title>
-            <v-list-item-subtitle>Daniel Bojorge</v-list-item-subtitle>
+            <v-list-item-title class="title">Fire Bike Service</v-list-item-title>
+            <v-list-item-subtitle>Ivan Gamboa Barroso</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -60,8 +60,8 @@ export default {
     return {
       menu:[
         {ruta:"/",nombre:"Inicio",icono:"home"},
-        {ruta:"/pixa",nombre:"Imágenes",icono:"image_search"},
-        {ruta:"/docs",nombre:"Documentos",icono:"devices_other"},
+        // {ruta:"/pixa",nombre:"Imágenes",icono:"image_search"},
+        // {ruta:"/docs",nombre:"Documentos",icono:"devices_other"},
         {ruta:"/siscmpfc",nombre:"SysCmpFc",icono:"storefront"},
       ],
       mostrarMenu:false,
