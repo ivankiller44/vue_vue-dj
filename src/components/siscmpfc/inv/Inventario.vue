@@ -12,7 +12,7 @@
         >
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-          <v-toolbar-title>Módulo Inventario</v-toolbar-title>
+          <v-toolbar-title>Módulo Stock</v-toolbar-title>
 
           <v-spacer></v-spacer>
           <v-btn icon @click="chooseOpt(1)">
