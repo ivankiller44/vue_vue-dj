@@ -141,7 +141,7 @@ export default {
   },
   computed:{
       formTitle(){
-          return (this.editedIdex === -1 ? "Nueva": "Editar") + " Sub Categoría"
+          return (this.editedIdex === -1 ? "Nuevo": "Editar") + " Producto"
       }
   },
   watch:{
