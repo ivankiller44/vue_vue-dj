@@ -7,10 +7,13 @@
             <v-tab>Stock</v-tab>
             <v-tab>Compra</v-tab>
             <v-tab>Recibo</v-tab>
+            <v-tab>Mantenimiento</v-tab>
 
             <v-tab-item> <Inventario /></v-tab-item>
             <v-tab-item> <Compras /></v-tab-item>
             <v-tab-item> <Facturas /></v-tab-item>
+            <v-tab-item> <Mants /></v-tab-item>
+
         </v-tabs>
     </v-card>
 </template>
@@ -19,6 +22,7 @@
 import Inventario from "./inv/Inventario"
 import Compras from "./cmp/Compras"
 import Facturas from "./fac/Facturas"
+import Mants from "./man/Mants"
 
 export default {
     name:"Principal",
@@ -26,6 +30,7 @@ export default {
         Inventario,
         Compras,
         Facturas,
+        Mants
     }
     
 }
