@@ -6,7 +6,7 @@
         <v-tabs>
             <v-tab>Stock</v-tab>
             <v-tab>Compra</v-tab>
-            <v-tab>Facturación</v-tab>
+            <v-tab>Recibo</v-tab>
 
             <v-tab-item> <Inventario /></v-tab-item>
             <v-tab-item> <Compras /></v-tab-item>
@@ -19,12 +19,13 @@
 import Inventario from "./inv/Inventario"
 import Compras from "./cmp/Compras"
 import Facturas from "./fac/Facturas"
+
 export default {
     name:"Principal",
     components:{
         Inventario,
         Compras,
-        Facturas
+        Facturas,
     }
     
 }
