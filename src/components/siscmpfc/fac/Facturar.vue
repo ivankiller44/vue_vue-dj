@@ -168,12 +168,46 @@
                         <template v-slot:foot(total)>
                             <span class="text-danger">{{totales.total}}</span>
                         </template>
-
+                        <template v-slot:foot(fecha)>
+                            <span class="text-danger">{{totales.fecha}}</span>
+                        </template>
                     </b-table>
                 </b-card>
             </b-col>
         </b-row>
+        <!-- prueba reportes -->
+        <b-row>
+          <table id="tableInsumo" class="table table-dark">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th  scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            id
+                        </th>
+                        <th  scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            descripcion
+                        </th>
+                        <th  scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            fecha
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-300">
+                    <tr v-for="i in items" :key="i.id">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            {{i.id}}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {{i.producto_descripcion}}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {{i.fecha}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </b-row>
         </b-overlay>
+        <!-- prueba de reportes -->
     </b-container>
 </template>
 
@@ -182,6 +216,22 @@ import { ApiFac } from "./ApiFac";
 import { ApiInv } from "../inv/ApiInv";
 import mensajesMixin from "../../../mixins/mensajesMixin"
 import moment from "moment"
+
+
+import "datatables.net-dt/js/dataTables.dataTables"
+import "datatables.net-dt/css/jquery.dataTables.min.css"
+import $ from 'jquery'; 
+
+window.JSZip = require('jszip')
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import 'datatables.net-dt'
+import 'datatables.net-buttons-dt'
+import 'datatables.net-buttons/js/buttons.html5.js'
+import 'datatables.net-buttons/js/buttons.flash.js'
+import 'datatables.net-buttons/js/buttons.print.js'
+
 export default {
   name: "Facturar",
   mixins:[mensajesMixin],
@@ -223,7 +273,8 @@ export default {
         { key: "subtotal", label: "Sub Total" },
         { key: "descuento", label: "Descuento" },
         { key: "total", label: "Total" },
-        { key: "acciones", label: "Acciones" }
+        { key: "acciones", label: "Acciones" },
+        { key: "fecha", label: "Fecha" },
       ]
     }
   },
@@ -257,6 +308,39 @@ export default {
                 const c = await this.api.getCliente();
                 this.clientes = c;    
                 this.nueva()
+
+                this.loading = true;
+                var facturas = await this.api.listFacturas()
+                console.log(facturas);
+                console.log("asdf");
+                facturas.forEach(element => {
+                    element.detalle.forEach(element => {
+                        this.items.push(element);
+                    });
+                });
+                setTimeout(() => {
+            $('#tableInsumo').DataTable({
+                scrollY: Math.round(window.innerHeight*0.62),
+                scrollX: false,
+                lengthMenu: [
+                    [25, 50, 100, -1],
+                    [25, 50, 100,"TODO"]
+                ],
+                // language: {
+                //     "url": "/DataTables/Spanish.json"
+                // },
+                dom: 'lBfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],        
+                "order": [[ 0, "asc" ]],
+                "ordering": true,
+                columnDefs: [
+                    { orderable: false, targets: "no-sort"},
+                    { "type": "num", "targets": 0 }
+                ],
+                });
+                }, 500);
             } catch (error) {
                 this.msgError(error)
             } finally {
@@ -409,7 +493,7 @@ export default {
               this.encabezado = r;
               this.encabezado.cliente = await this.api.getCliente(this.encabezado.cliente);
               this.encabezado.fecha = moment(r.fecha, 'YYYY-MM-DD').format('DD/MM/YYYY')
-              this.items = r.detalle; 
+              this.items = r.detalle;   
             }
           } catch (error) {
             this.msgError(`Error Refrescando con: ${error}`)
@@ -446,6 +530,8 @@ export default {
         }else{
           this.$swal("Búsqueda Cancelada","","warning")
         }
+        
+// reportes aqui
       },
       async nueva() {
         this.encabezado = {
@@ -464,7 +550,7 @@ export default {
           precio: 0,
           subtotal: 0,
           descuento: 0,
-          total: 0
+          total: 0,
         };
         this.editar = false
         this.items = []
@@ -480,5 +566,38 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+  /* Buttons DataTable */
+  div.dt-buttons {
+    margin-left: 10px;
+    float: right;
+  }
+  /* copiar csv excel pdf */ 
+  .buttons-html5 {
+    background-color: #008CBA; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 15px;
+  }
+  /* imprimir */
+  .buttons-print {
+    background-color: #008CBA; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 15px;
+  }
 </style>

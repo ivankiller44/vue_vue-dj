@@ -27,6 +27,26 @@ export default class Api{
         return token;
       }
 
+      async list(nombre) {
+
+        const token = await this.getToken();
+
+        let url = this.SERVER_URL + nombre +"/";
+
+        const res = await fetch(url, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + token.access,
+            }
+        });
+        const items = await res.json();
+        
+        if(items.results===undefined){
+          return items
+        }
+        return items.results;
+    }
       async get(nombre,id=-1) {
 
         const token = await this.getToken();

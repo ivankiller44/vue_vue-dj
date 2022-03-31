@@ -21,6 +21,9 @@ export class ApiFac extends Api{
         return await super.delete(contexto,id)
     }
 
+    async listFacturas(){
+        return await super.list(contextoEnc);
+    }
     async getFacturas(id){
         return await super.get(contextoEnc,id);
     }
