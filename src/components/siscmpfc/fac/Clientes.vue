@@ -120,8 +120,11 @@
                         </b-row>
                     </b-container>
                 </b-modal>
+                <br>
+                <b-card>
+                <b-container>
                     <b-row>
-                        <table id="tableInsumo" class="table table-dark">
+                        <table id="tableInsumo" class="table table-striped">
                             <thead class="bg-gray-50">
                                 <tr>
                                     <th  scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -156,6 +159,8 @@
                             </tbody>
                         </table>
                     </b-row>
+                </b-container>
+                </b-card>
             </b-col>
         </b-row>
     </b-container>

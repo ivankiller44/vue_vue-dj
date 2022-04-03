@@ -176,8 +176,10 @@
             </b-col>
         </b-row>
         <!-- prueba reportes -->
+        <b-card>
+        <b-container>
         <b-row>
-          <table id="tableInsumo" class="table table-dark">
+          <table id="tableInsumo" class="table table-stripedk">
                 <thead class="bg-gray-50">
                     <tr>
                         <th  scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -206,6 +208,8 @@
                 </tbody>
             </table>
         </b-row>
+        </b-container>
+        </b-card>
         </b-overlay>
         <!-- prueba de reportes -->
     </b-container>
