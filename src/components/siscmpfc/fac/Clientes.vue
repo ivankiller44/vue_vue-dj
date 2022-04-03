@@ -38,6 +38,7 @@
         </b-row>
         <b-row>
             <b-col>
+                <b-card>
                 <b-table
                   dense
                   striped
@@ -72,6 +73,7 @@
                     <b-icon icon="trash" size="sm" @click="borrar(row.item)"></b-icon>
                   </template>
                 </b-table>
+                </b-card>
                 <b-modal id="modal" v-model="modalShow" size="xl" title="Clientes" no-close-on-backdrop no-close-on-esc
                 hide-footer centered hide-header-close >
                     <b-container fluid>

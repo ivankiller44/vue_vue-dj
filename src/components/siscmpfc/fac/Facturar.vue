@@ -176,6 +176,7 @@
             </b-col>
         </b-row>
         <!-- prueba reportes -->
+        <br>
         <b-card>
         <b-container>
         <b-row>
