@@ -318,8 +318,7 @@ export default {
                         this.items.push(element);
                     });
                 });
-                setTimeout(() => {
-            $('#tableInsumo').DataTable({
+                setTimeout(() => { $('#tableInsumo').DataTable({
                 scrollY: Math.round(window.innerHeight*0.62),
                 scrollX: false,
                 lengthMenu: [

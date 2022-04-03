@@ -120,6 +120,42 @@
                         </b-row>
                     </b-container>
                 </b-modal>
+                    <b-row>
+                        <table id="tableInsumo" class="table table-dark">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th  scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        id
+                                    </th>
+                                    <th  scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Nombre
+                                    </th>
+                                    <th  scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Telefono
+                                    </th>
+                                    <th  scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Email
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-300">
+                                <tr v-for="i in items" :key="i.id">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        {{i.id}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {{i.nombre}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {{i.telefono}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {{i.email}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </b-row>
             </b-col>
         </b-row>
     </b-container>
@@ -129,6 +165,21 @@
 import { ApiFac } from "./ApiFac";
 import { BIcon } from "bootstrap-vue";
 import mensajesMixin from "../../../mixins/mensajesMixin"
+
+import "datatables.net-dt/js/dataTables.dataTables"
+import "datatables.net-dt/css/jquery.dataTables.min.css"
+import $ from 'jquery'; 
+
+window.JSZip = require('jszip')
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import 'datatables.net-dt'
+import 'datatables.net-buttons-dt'
+import 'datatables.net-buttons/js/buttons.html5.js'
+import 'datatables.net-buttons/js/buttons.flash.js'
+import 'datatables.net-buttons/js/buttons.print.js'
+
 export default {
     name:"Cliente",
 	components: {
@@ -143,26 +194,10 @@ export default {
             api: new ApiFac(),
             fields: [
                 { key: "id", label: "ID", sortable: true},
-                {
-                key: "nombre",
-                label: "Nombres",
-                sortable: true
-                },
-                {
-                key: "telefono",
-                label: "Teléfono",
-                sortable: true
-                },
-                {
-                key: "email",
-                label: "E-Mail",
-                sortable: true
-                },
-                {
-                key: "estado",
-                label: "Activo?",
-                sortable: true
-                },
+                { key: "nombre", label: "Nombres", sortable: true},
+                { key: "telefono", label: "Teléfono", sortable: true},
+                { key: "email", label: "E-Mail", sortable: true},
+                { key: "estado", label: "Activo?", sortable: true},
                 { key: "acciones", label: "Acciones", sortable: false }
             ],
             items: [],
@@ -185,11 +220,59 @@ export default {
                 this.loading = true
                 const r = await this.api.getCliente()
                 this.items = r
+
+                setTimeout(() => { $('#tableInsumo').DataTable({
+                scrollY: Math.round(window.innerHeight*0.62),
+                scrollX: false,
+                lengthMenu: [
+                    [25, 50, 100, -1],
+                    [25, 50, 100,"TODO"]
+                ],
+                // language: {
+                //     "url": "/DataTables/Spanish.json"
+                // },
+                dom: 'lBfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],        
+                "order": [[ 0, "asc" ]],
+                "ordering": true,
+                columnDefs: [
+                    { orderable: false, targets: "no-sort"},
+                    { "type": "num", "targets": 0 }
+                ],
+                });
+                }, 500);
+
             } catch (error) {
                 alert(error)
             } finally {
                 this.loading = false
             }
+
+            setTimeout(() => {
+            $('#tableInsumo').DataTable({
+                scrollY: Math.round(window.innerHeight*0.62),
+                scrollX: false,
+                lengthMenu: [
+                    [25, 50, 100, -1],
+                    [25, 50, 100,"TODO"]
+                ],
+                // language: {
+                //     "url": "/DataTables/Spanish.json"
+                // },
+                dom: 'lBfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],        
+                "order": [[ 0, "asc" ]],
+                "ordering": true,
+                columnDefs: [
+                    { orderable: false, targets: "no-sort"},
+                    { "type": "num", "targets": 0 }
+                ],
+                });
+                }, 500);
         },
         cerrar(){
             this.modalShow = false
