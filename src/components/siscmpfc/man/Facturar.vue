@@ -79,10 +79,42 @@
                 <b-form-input v-model="encabezado.id" :disabled="!editar" type="text"></b-form-input>
             </b-col>
             <b-col sm="1">
-                <label for="fecha">Fecha:</label>
+                <label for="fecha">Fecha ingreso:</label>
+                <br>
+                <br>
+                <label for="fecha">Fecha salida:</label>
             </b-col>
             <b-col sm="2">
                 <b-form-input v-model="encabezado.fecha" type="text" disabled></b-form-input>
+                <v-flex>
+                  <v-menu
+                    ref="menu"
+                    v-model="menu"
+                    :close-on-content-click="false"
+                    :nudge-right="40"
+                    :return-value.sync="date"
+                    lazy
+                    transition="scale-transition"
+                    offset-y
+                    full-width
+                    min-width="290px"
+                  >
+                    <template v-slot:activator="{ on }">
+                      <v-text-field
+                        v-model="date"
+                        prepend-icon="event"
+                        readonly
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker v-model="date" no-title scrollable>
+                      <v-spacer></v-spacer>
+                      <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
+                      <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+                    </v-date-picker>
+                  </v-menu>
+                </v-flex>
+                <v-spacer></v-spacer>
             </b-col>
             <b-col sm="1">
                 <label for="cliente">Cliente:</label>
@@ -101,6 +133,10 @@
                 </b-button>
             </b-col>
         </b-row>
+        <br>
+        <!-- intento de busqueda de los productos -->
+        <Producto/>
+        <!-- intento de busqueda de los productos -->
         <b-row>
             <b-col>
                 <b-card
@@ -174,16 +210,27 @@
             </b-col>
         </b-row>
         </b-overlay>
+        <!-- campo descripcion -->
+        <br>
+        <b-card title="Observaciones" class="mb-2">
+        <b-form-input v-model="encabezado.observaciones" rows="1" col='1'/>
+        </b-card>
+        <br>
+        <!-- campo descripcion -->
     </b-container>
 </template>
 
 <script>
 import { ApiFac } from "./ApiFac";
 import { ApiInv } from "../inv/ApiInv";
+import Producto from "../inv/Producto"
 import mensajesMixin from "../../../mixins/mensajesMixin"
 import moment from "moment"
 export default {
   name: "Facturar",
+  components: {
+      Producto,
+  },
   mixins:[mensajesMixin],
   data() {
     return {
@@ -363,7 +410,8 @@ export default {
                 const enc = {
                     id: this.encabezado.id,
                     cliente: this.encabezado.cliente.id,
-                    fecha: fechaFact
+                    fecha: fechaFact,
+                    observaciones:this.encabezado.observaciones,
                 }
                 const f = await this.api.saveEncabezado(enc)
                 if(f.id===undefined){
@@ -439,7 +487,8 @@ export default {
                 id: -1,
                 nombre: ""
               },
-              fecha: moment().format("DD/MM/YYYY")
+              fecha: moment().format("DD/MM/YYYY"),
+              observaciones:null,
             }
             this.$swal("Factura No Encontrada",idEnc,"error")
           }
@@ -454,7 +503,8 @@ export default {
             id: -1,
             nombre: ""
           },
-          fecha: moment().format("DD/MM/YYYY")
+          fecha: moment().format("DD/MM/YYYY"),
+          observaciones:null,
         }
         this.detalle = {
           id: -1,

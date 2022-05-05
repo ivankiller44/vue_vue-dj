@@ -1,6 +1,8 @@
 <template>
-  <v-app>
-    <v-container>
+  <!-- <v-app> -->
+    <!-- <v-container> -->
+    <b-card>
+      <v-container>
       <v-row>
         <v-col>
           <v-data-table
@@ -85,8 +87,11 @@
           </v-data-table>
         </v-col>
       </v-row>
-    </v-container>
-  </v-app>
+      </v-container>
+    </b-card>
+
+    <!-- </v-container> -->
+  <!-- </v-app> -->
 </template>
 
 <script>

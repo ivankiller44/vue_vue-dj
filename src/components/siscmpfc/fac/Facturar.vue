@@ -101,6 +101,10 @@
                 </b-button>
             </b-col>
         </b-row>
+        <br>
+        <!-- intento de busqueda de los productos -->
+        <Producto/>
+        <!-- intento de busqueda de los productos -->
         <b-row>
             <b-col>
                 <b-card
@@ -128,6 +132,7 @@
                 </b-card>
             </b-col>
         </b-row>
+        
         <b-row>
             <b-col>
                 <b-card title="Detalle" class="mb-2">
@@ -190,6 +195,9 @@
                             descripcion
                         </th>
                         <th  scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            cantidad
+                        </th>
+                        <th  scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             fecha
                         </th>
                     </tr>
@@ -205,6 +213,9 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {{i.fecha}}
                         </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {{i.cantidad}}
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -214,11 +225,13 @@
         </b-overlay>
         <!-- prueba de reportes -->
     </b-container>
+    
 </template>
 
 <script>
 import { ApiFac } from "./ApiFac";
 import { ApiInv } from "../inv/ApiInv";
+import Producto from "../inv/Producto"
 import mensajesMixin from "../../../mixins/mensajesMixin"
 import moment from "moment"
 
@@ -239,6 +252,9 @@ import 'datatables.net-buttons/js/buttons.print.js'
 
 export default {
   name: "Facturar",
+  components: {
+      Producto,
+  },
   mixins:[mensajesMixin],
   data() {
     return {
