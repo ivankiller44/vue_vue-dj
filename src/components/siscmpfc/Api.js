@@ -3,7 +3,7 @@ const apiAuth=new ApiAuth()
 
 export default class Api{
     constructor(){
-        this.SERVER_URL = 'http://127.0.0.1:8000/rest/v1/'
+        this.SERVER_URL = 'http://34.125.138.63/rest/v1/'
         this.TOKEN_URL = this.SERVER_URL + 'token/'
         this.USUARIO = 'debs'
         this.PASSWROD = '1234567.'
