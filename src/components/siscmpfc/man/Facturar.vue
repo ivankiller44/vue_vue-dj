@@ -214,6 +214,29 @@
         <br>
         <b-card title="Observaciones" class="mb-2">
         <b-form-input v-model="encabezado.observaciones" rows="1" col='1'/>
+        <br>
+        <b-row>
+          <b-col>
+        <b-form-checkbox v-model="encabezado.en_mantenimiento" button>
+          En mantenimiento 
+        </b-form-checkbox>
+        </b-col>
+        <b-col>
+        <b-form-checkbox v-model="encabezado.no_mantenimiento" button>
+          No mantenimiento 
+        </b-form-checkbox>
+        </b-col>
+        <b-col>
+        <b-form-checkbox v-model="encabezado.complete_mant" button>
+          Mantenimiento completo
+        </b-form-checkbox>
+        </b-col>
+        </b-row>
+        <b-col sm="1">
+          <b-btn block variant="success" @click="guardar">
+            <b-icon icon="check2-circle" scale="1.5"></b-icon>
+          </b-btn>
+        </b-col>
         </b-card>
         <br>
         <!-- campo descripcion -->
@@ -412,6 +435,9 @@ export default {
                     cliente: this.encabezado.cliente.id,
                     fecha: fechaFact,
                     observaciones:this.encabezado.observaciones,
+                    en_mantenimiento:this.encabezado.en_mantenimiento,
+                    no_mantenimiento:this.encabezado.no_mantenimiento,
+                    complete_mant:this.encabezado.complete_mant,
                 }
                 const f = await this.api.saveEncabezado(enc)
                 if(f.id===undefined){
@@ -436,6 +462,46 @@ export default {
                         this.encabezado = f;
                         this.encabezado.cliente = await this.api.getCliente(this.encabezado.cliente);
                         this.encabezado.fecha = moment(f.fecha, 'YYYY-MM-DD').format('DD/MM/YYYY')
+                    }
+                }
+            }catch(error){
+                this.msgError(error)
+            }finally{
+                this.loading = false
+                this.refresh()
+            }
+        },
+        async guardar(){
+            let fechaFact = this.encabezado.fecha
+            fechaFact = moment(fechaFact, 'DD/MM/YYYY').format('YYYY-MM-DD')
+            try{
+                this.loading=true
+                const enc = {
+                    id: this.encabezado.id,
+                    cliente: this.encabezado.cliente.id,
+                    fecha: fechaFact,
+                    observaciones:this.encabezado.observaciones,
+                    en_mantenimiento:this.encabezado.en_mantenimiento,
+                    no_mantenimiento:this.encabezado.no_mantenimiento,
+                    complete_mant:this.encabezado.complete_mant,
+                }
+                const f = await this.api.saveEncabezado(enc)
+                if(f.id===undefined){
+                    this.msgError(`Falló en Guardar Encabezado con: ${f}`)
+                }else{
+                    let id = f.id
+                    const det = {
+                        id: -1,
+                        cabecera : id,
+                        producto : this.detalle.producto,
+                        cantidad : this.detalle.cantidad,
+                        precio : this.detalle.precio,
+                        descuento: this.detalle.descuento
+                    }
+                    const d = await this.api.saveDetalle(det)
+                    if(d.id===undefined){
+                        this.encabezado.id = f.id
+                        this.refresh()
                     }
                 }
             }catch(error){
@@ -489,6 +555,9 @@ export default {
               },
               fecha: moment().format("DD/MM/YYYY"),
               observaciones:null,
+              en_mantenimiento:null,
+              no_mantenimiento:null,
+              complete_mant:null,
             }
             this.$swal("Factura No Encontrada",idEnc,"error")
           }
@@ -505,6 +574,9 @@ export default {
           },
           fecha: moment().format("DD/MM/YYYY"),
           observaciones:null,
+          en_mantenimiento:null,
+          no_mantenimiento:null,
+          complete_mant:null,
         }
         this.detalle = {
           id: -1,

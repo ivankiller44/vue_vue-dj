@@ -195,10 +195,10 @@
                             descripcion
                         </th>
                         <th  scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            cantidad
+                            fecha
                         </th>
                         <th  scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            fecha
+                            cantidad 
                         </th>
                     </tr>
                 </thead>
@@ -361,6 +361,7 @@ export default {
                 ],
                 });
                 }, 500);
+                // console.log(this.items)
             } catch (error) {
                 this.msgError(error)
             } finally {

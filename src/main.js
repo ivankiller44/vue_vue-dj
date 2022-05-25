@@ -34,7 +34,7 @@ Vue.mixin({
       })
     },
     msgError(txt){
-      this.msg(txt,"mixin global","error")
+      this.msg(txt,"Alerta","error")
     }
   }
 })
