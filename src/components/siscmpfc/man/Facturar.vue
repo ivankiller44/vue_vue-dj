@@ -555,9 +555,9 @@ export default {
               },
               fecha: moment().format("DD/MM/YYYY"),
               observaciones:null,
-              en_mantenimiento:null,
-              no_mantenimiento:null,
-              complete_mant:null,
+              en_mantenimiento:false,
+              no_mantenimiento:false,
+              complete_mant:false,
             }
             this.$swal("Factura No Encontrada",idEnc,"error")
           }
@@ -574,9 +574,9 @@ export default {
           },
           fecha: moment().format("DD/MM/YYYY"),
           observaciones:null,
-          en_mantenimiento:null,
-          no_mantenimiento:null,
-          complete_mant:null,
+          en_mantenimiento:false,
+          no_mantenimiento:false,
+          complete_mant:false,
         }
         this.detalle = {
           id: -1,

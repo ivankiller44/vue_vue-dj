@@ -1,7 +1,7 @@
 <template>
     <v-card class="color-fondo">
-        <v-card-title>
-            <h1 class="font-weight-bold display-6 color-texto">Sitema web progresiva de gestión de mantenimiento, stock y ventas, basado en el modelo de software as a service (SaaS)</h1>
+        <v-card-title class="justify-center">
+            <div align="center"><img src="../../assets/logo_FBS.jpg" alt="" width="25%" height="auto" rounded="circle" class='imgRedonda'></div>
         </v-card-title>
         <v-tabs>
             <v-tab>Stock</v-tab>
@@ -42,9 +42,14 @@ export default {
 
 <style>
 .color-fondo {
-    background-color: #FFFBE6 !important;
+    background-color: #ffffff !important;
 }
 .color-texto {
     color: #356859 !important;
+}
+.imgRedonda {
+    width:150px;
+    height:150px;
+    border-radius:150px;
 }
 </style>
