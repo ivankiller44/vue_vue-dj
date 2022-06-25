@@ -135,7 +135,7 @@
         </b-row>
         <br>
         <!-- intento de busqueda de los productos -->
-        <Producto/>
+        <Producto1/>
         <!-- intento de busqueda de los productos -->
         <b-row>
             <b-col>
@@ -246,13 +246,13 @@
 <script>
 import { ApiFac } from "./ApiFac";
 import { ApiInv } from "../inv/ApiInv";
-import Producto from "../inv/Producto"
+import Producto1 from "../inv/Producto1"
 import mensajesMixin from "../../../mixins/mensajesMixin"
 import moment from "moment"
 export default {
   name: "Facturar",
   components: {
-      Producto,
+      Producto1,
   },
   mixins:[mensajesMixin],
   data() {
